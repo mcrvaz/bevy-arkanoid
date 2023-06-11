@@ -32,7 +32,6 @@ pub fn spawn_paddle(mut commands: Commands, asset_server: Res<AssetServer>) {
             friction: Friction::coefficient(0.0),
         },
     });
-    println!("spawn paddle!");
 }
 
 pub fn spawn_balls(
