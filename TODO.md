@@ -6,10 +6,11 @@ Destrua blocos para ganhar mais pontos.
 ### Controles
 &nbsp;&nbsp;&nbsp;&nbsp;<kbd>↑</kbd>
 <kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
-<kbd>Space</kbd>
 
-Jogador movimenta o Vaus (paddle) pelas setas direcionais do teclado.
-A cada novo round, o jogador começa com uma bola acoplada no Vaus e pode apertar barra de espaço para soltá-la.
+&nbsp;&nbsp;&nbsp;&nbsp;<kbd>A</kbd>
+<kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
+
+Jogador movimenta o Vaus (paddle) pelas setas direcionais do teclado ou AWSD.
 
 ### Blocos
 Cada bloco perde durabilidade ao colidir com uma bola. Quando a durabilidade chega a zero, o bloco é destruído.

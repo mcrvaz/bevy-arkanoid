@@ -36,11 +36,21 @@ pub struct Ball {
 #[derive(Component)]
 pub struct Wall {
     pub score: i32,
+    pub durability: i32,
+}
+
+#[derive(Default, Component)]
+pub struct MatchData {
+    pub score: i32,
+    pub lives: i32,
+    pub ball_count: i32,
+    pub wall_count: i32,
+    pub max_ball_count: i32
 }
 
 impl Wall {
     pub const fn get_size() -> Vec2 {
-        // Vec2::new(16.0, 8.0)
+        // Vec2::new(16.0, 8.0) // original size
         Vec2::new(8.0, 8.0)
     }
 }
@@ -50,9 +60,3 @@ pub struct Bounds {}
 
 #[derive(Component)]
 pub struct Goal {}
-
-#[derive(Component)]
-pub struct PlayerData {
-    pub score: i32,
-    pub lives: i32,
-}
