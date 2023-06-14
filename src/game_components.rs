@@ -43,9 +43,8 @@ pub struct Wall {
 pub struct MatchData {
     pub score: i32,
     pub lives: i32,
-    pub ball_count: i32,
-    pub wall_count: i32,
-    pub max_ball_count: i32
+    pub max_ball_count: i32,
+    pub max_paddle_count: i32,
 }
 
 impl Wall {
