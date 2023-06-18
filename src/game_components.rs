@@ -98,7 +98,6 @@ pub struct Wall {
 
 impl Wall {
     pub const fn get_size() -> Vec2 {
-        // Vec2::new(16.0, 8.0) // original size
         Vec2::new(8.0, 8.0)
     }
 
