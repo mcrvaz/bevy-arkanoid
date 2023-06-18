@@ -1,5 +1,21 @@
 # ECS Arkanoid
 
+### Introdução e Motivação
+- Introdução simples ao ECS
+    - Unity DOTS é bastante complexo e muda constantemente
+    - Alguns jogos que usam ECS: **Overwatch, V Rising, Hardspace: Shipbreaker**
+- Contato com uma nova linguagem de programação: **Rust**
+    - Rust é atualmente o melhor candidato para sucessor ser do C++
+    - Segurança de memória: Borrow Checker
+        - Alternativa ao gerenciamento manual de memória e ao Garbage Collector
+    - Mais contato com detalhes de baixo nível
+        - Passagem por referência vs valor
+        - Alocação no heap vs stack
+- [Bevy](https://github.com/bevyengine/bevy):
+    - Engine open source
+    - Feita com ECS desde o início
+    - Ainda não possui editor
+
 ### Controles
 &nbsp;&nbsp;&nbsp;&nbsp;<kbd>↑</kbd>
 <kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
@@ -55,3 +71,4 @@ Quando não houver mais nenhum bloco visível na tela, o jogo é finalizado na c
 - [ ] Armazenar high score ao fim da partida
 - [ ] Recomeçar partida
 - [ ] Animar a destruição dos blocos
+- [ ] Bug Fix: Impedir múltiplas colisões no mesmo bloco

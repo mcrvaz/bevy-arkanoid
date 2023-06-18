@@ -34,7 +34,7 @@ pub fn setup_cameras(mut cmd: Commands) {
 pub fn setup_match(mut cmd: Commands) {
     cmd.spawn(MatchData {
         lives: 3,
-        max_ball_count: i32::pow(2, 3),
+        max_ball_count: i32::pow(2, 10),
         ..default()
     });
 }
