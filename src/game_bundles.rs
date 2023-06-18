@@ -32,10 +32,19 @@ pub struct Physics {
     pub velocity: Velocity,
     pub restitution: Restitution,
     pub friction: Friction,
+    pub sleeping: Sleeping,
 }
 
 #[derive(Bundle)]
 pub struct WallBundle {
+    pub wall: Wall,
+    pub sprite: SpriteBundle,
+    pub collider: Collider,
+}
+
+#[derive(Bundle)]
+pub struct PowerUpBundle {
+    pub power_up: PowerUp,
     pub sprite: SpriteBundle,
     pub physics: Physics,
 }

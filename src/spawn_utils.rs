@@ -31,8 +31,15 @@ pub fn spawn_paddle(
                 coll_events: ActiveEvents::COLLISION_EVENTS,
                 locked_axes: LockedAxes::all(),
                 velocity: Velocity::zero(),
-                restitution: Restitution::coefficient(1.0),
-                friction: Friction::coefficient(0.0),
+                restitution: Restitution {
+                    coefficient: 1.0,
+                    combine_rule: CoefficientCombineRule::Max,
+                },
+                friction: Friction {
+                    coefficient: 0.0,
+                    combine_rule: CoefficientCombineRule::Min,
+                },
+                sleeping: Sleeping::disabled(),
             },
         })
         .id()
@@ -41,6 +48,7 @@ pub fn spawn_paddle(
 pub fn spawn_ball(
     commands: &mut Commands,
     position: Vec2,
+    velocity: Vec2,
     asset_server: &Res<AssetServer>,
 ) -> Entity {
     let size = Vec2::new(5.0, 4.0);
@@ -56,16 +64,23 @@ pub fn spawn_ball(
     };
     commands
         .spawn(BallBundle {
-            ball: Ball { speed: 0.0 },
+            ball: Ball {},
             sprite: sprite,
             physics: Physics {
                 collider: Collider::cuboid(size.x / 2.0, size.y / 2.0),
                 rb: RigidBody::Dynamic,
                 coll_events: ActiveEvents::COLLISION_EVENTS,
-                locked_axes: LockedAxes::all(),
-                velocity: Velocity::zero(),
-                restitution: Restitution::coefficient(1.0),
-                friction: Friction::coefficient(0.0),
+                locked_axes: LockedAxes::ROTATION_LOCKED,
+                velocity: Velocity::linear(velocity),
+                restitution: Restitution {
+                    coefficient: 1.0,
+                    combine_rule: CoefficientCombineRule::Max,
+                },
+                friction: Friction {
+                    coefficient: 0.0,
+                    combine_rule: CoefficientCombineRule::Min,
+                },
+                sleeping: Sleeping::disabled(),
             },
         })
         .id()
@@ -73,18 +88,18 @@ pub fn spawn_ball(
 
 pub fn spawn_wall(
     commands: &mut Commands,
-    wall_color: WallColor,
+    wall: Wall,
     position: Vec2,
     asset_server: &Res<AssetServer>,
 ) -> Entity {
     let size = Wall::get_size();
     let path = Path::new("sprites")
         .join("walls")
-        .join(wall_color.get_file_name());
+        .join(wall.color.get_file_name());
     let sprite = SpriteBundle {
         texture: asset_server.load(path),
         sprite: Sprite {
-            custom_size: Option::Some(Wall::get_size()),
+            custom_size: Option::Some(size),
             ..default()
         },
         transform: Transform::from_translation(position.extend(0.0)),
@@ -92,16 +107,35 @@ pub fn spawn_wall(
     };
     commands
         .spawn(WallBundle {
-            sprite: sprite,
-            physics: Physics {
-                rb: RigidBody::Fixed,
-                collider: Collider::cuboid(size.x / 2.0, size.y / 2.0),
-                coll_events: ActiveEvents::COLLISION_EVENTS,
-                locked_axes: LockedAxes::all(),
-                velocity: Velocity::zero(),
-                restitution: Restitution::coefficient(1.0),
-                friction: Friction::coefficient(0.0),
-            },
+            wall,
+            sprite,
+            collider: Collider::cuboid(size.x / 2.0, size.y / 2.0),
+        })
+        .id()
+}
+
+pub fn spawn_bounds(
+    commands: &mut Commands,
+    bounds: Bounds,
+    position: Vec2,
+    asset_server: &Res<AssetServer>,
+) -> Entity {
+    let size = Bounds::get_size();
+    let path = Path::new("sprites").join("bounds.png");
+    let sprite = SpriteBundle {
+        texture: asset_server.load(path),
+        sprite: Sprite {
+            custom_size: Option::Some(size),
+            ..default()
+        },
+        transform: Transform::from_translation(position.extend(0.0)),
+        ..default()
+    };
+    commands
+        .spawn(BoundsBundle {
+            bounds,
+            sprite,
+            collider: Collider::cuboid(size.x / 2.0, size.y / 2.0),
         })
         .id()
 }

@@ -1,12 +1,15 @@
 mod game_bundles;
 mod game_components;
+mod game_events;
 mod game_systems;
 mod input;
 mod spawn_utils;
+mod utils;
 
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
+use crate::game_events::*;
 use crate::game_systems::*;
 
 fn main() {
@@ -30,7 +33,8 @@ fn main() {
             (
                 GameSets::Spawn,
                 GameSets::ComputeForces,
-                GameSets::FindCollisions,
+                GameSets::EvaluateCollisions,
+                GameSets::HandleEvents
             )
                 .chain(),
         )
@@ -40,8 +44,10 @@ fn main() {
             setup_physics,
             setup_input,
             setup_match,
-            spawn_walls,
+            setup_map,
         ))
+        .add_event::<GoalEvent>()
+        .add_event::<WallCollisionEvent>()
         .add_systems(
             (
                 spawn_paddles.run_if(can_spawn_paddles),
@@ -51,7 +57,9 @@ fn main() {
                 .chain()
                 .in_set(GameSets::Spawn),
         )
-        .add_systems((move_paddles, move_balls).in_set(GameSets::ComputeForces))
+        .add_system(move_paddles.in_set(GameSets::ComputeForces))
+        .add_system(evaluate_collisions.in_set(GameSets::EvaluateCollisions))
+        .add_system(handle_wall_collision.in_set(GameSets::HandleEvents))
         .run();
 }
 
@@ -59,5 +67,6 @@ fn main() {
 enum GameSets {
     Spawn,
     ComputeForces,
-    FindCollisions,
+    EvaluateCollisions,
+    HandleEvents
 }
