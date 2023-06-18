@@ -78,6 +78,7 @@ pub fn spawn_ball(
             sleeping: Sleeping::disabled(),
         },
     })
+    .insert(CollisionGroups::new(Group::GROUP_1, Group::ALL - Group::GROUP_1))
     .id()
 }
 

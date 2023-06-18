@@ -34,6 +34,7 @@ pub fn setup_cameras(mut cmd: Commands) {
 pub fn setup_match(mut cmd: Commands) {
     cmd.spawn(MatchData {
         lives: 3,
+        max_ball_count: i32::pow(2, 3),
         ..default()
     });
 }
@@ -115,16 +116,16 @@ fn evaluate_ball_collision(
     if let Ok(ball) = ball_query.get(*e1).or(ball_query.get(*e2)) {
         let other = if ball == *e1 { *e2 } else { *e1 };
         if wall_query.get(other).is_ok() {
-            println!("wall collision");
+            // println!("wall collision");
             wall_collision_ev.send(WallCollisionEvent {
                 ball: ball,
                 wall: other,
             });
         } else if goal_query.get(other).is_ok() {
-            println!("goal collision");
+            // println!("goal collision");
             goal_ev.send(GoalEvent { ball: ball });
         } else if paddle_query.get(other).is_ok() {
-            println!("paddle collision");
+            // println!("paddle collision");
         }
     }
 }

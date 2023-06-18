@@ -23,6 +23,8 @@ Ao destruir blocos, o jogador ganha pontos de acordo com a tabela abaixo:
 | Red   | 110        | 3        |
 | Gold   | -        | -        |
 
+Adicionalmente, quando um bloco é destruído, há uma chance de 50% de gerar um powerup qualquer.
+
 ### Powerups
 Quando uma bola colide com um powerup, o jogador recebe um bônus de acordo com a tabela abaixo:
 | Cor      | Bônus |
