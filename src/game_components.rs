@@ -157,9 +157,9 @@ pub struct MatchData {
 }
 
 #[derive(Component)]
-pub struct Bounds {}
+pub struct Bound {}
 
-impl Bounds {
+impl Bound {
     pub const fn get_size() -> Vec2 {
         Vec2::new(32.0, 7.0)
     }

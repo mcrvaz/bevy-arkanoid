@@ -18,7 +18,7 @@ pub struct BallBundle {
 
 #[derive(Bundle)]
 pub struct BoundsBundle {
-    pub bounds: Bounds,
+    pub bounds: Bound,
     pub sprite: SpriteBundle,
     pub collider: Collider,
 }

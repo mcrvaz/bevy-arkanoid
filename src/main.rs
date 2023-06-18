@@ -5,12 +5,14 @@ mod game_systems;
 mod input;
 mod spawn_utils;
 mod utils;
+mod map_spawn_systems;
 
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
 use crate::game_events::*;
 use crate::game_systems::*;
+use crate::map_spawn_systems::*;
 
 fn main() {
     let plugins = DefaultPlugins
