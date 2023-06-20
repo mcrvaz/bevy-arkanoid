@@ -2,6 +2,7 @@ use crate::game_components::*;
 use crate::game_events::*;
 use crate::input::*;
 use crate::spawn_utils::*;
+use crate::ui_spawn_utils::spawn_hud;
 use crate::utils::*;
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
@@ -37,6 +38,10 @@ pub fn setup_match(mut cmd: Commands) {
         max_ball_count: i32::pow(2, 10),
         ..default()
     });
+}
+
+pub fn spawn_ui(cmd: Commands, asset_sv: Res<AssetServer>) {
+    spawn_hud(cmd, asset_sv)
 }
 
 pub fn spawn_paddles(mut cmd: Commands, asset_sv: Res<AssetServer>) {

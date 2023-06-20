@@ -6,6 +6,8 @@ mod input;
 mod spawn_utils;
 mod utils;
 mod map_spawn_systems;
+mod ui_systems;
+mod ui_spawn_utils;
 
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
@@ -47,6 +49,7 @@ fn main() {
             setup_input,
             setup_match,
             setup_map,
+            spawn_ui
         ))
         .add_event::<GoalEvent>()
         .add_event::<WallCollisionEvent>()
