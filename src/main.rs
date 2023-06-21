@@ -38,7 +38,8 @@ fn main() {
                 GameSets::Spawn,
                 GameSets::ComputeForces,
                 GameSets::EvaluateCollisions,
-                GameSets::HandleEvents
+                GameSets::HandleEvents,
+                GameSets::UpdateUI
             )
                 .chain(),
         )
@@ -65,6 +66,7 @@ fn main() {
         .add_system(move_paddles.in_set(GameSets::ComputeForces))
         .add_system(evaluate_collisions.in_set(GameSets::EvaluateCollisions))
         .add_system(handle_wall_collision.in_set(GameSets::HandleEvents))
+        .add_system(update_score.in_set(GameSets::UpdateUI))
         .run();
 }
 
@@ -73,5 +75,6 @@ enum GameSets {
     Spawn,
     ComputeForces,
     EvaluateCollisions,
-    HandleEvents
+    HandleEvents,
+    UpdateUI,
 }

@@ -143,3 +143,14 @@ pub fn handle_wall_collision(
         cmd.entity(ev.wall).despawn();
     }
 }
+
+pub fn update_score(
+    match_data_query: Query<&MatchData>,
+    mut text_score_query: Query<&mut Text, With<ScoreCounter>>
+) {
+    let match_data = match_data_query.single();
+    let team_score = match_data.score;
+    for mut text in text_score_query.iter_mut() {
+        text.sections[0].value = team_score.to_string();
+    }
+}

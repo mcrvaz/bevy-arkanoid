@@ -90,6 +90,9 @@ pub struct Paddle {
 pub struct Ball {}
 
 #[derive(Component)]
+pub struct ScoreCounter {}
+
+#[derive(Component)]
 pub struct Wall {
     pub score: i32,
     pub durability: i32,
